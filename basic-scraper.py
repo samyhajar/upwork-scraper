@@ -1,7 +1,7 @@
 from math import prod
 from requests_html import HTMLSession
 import csv
-
+import pandas as pd
 
 s = HTMLSession()
 
@@ -62,6 +62,9 @@ def main():
       results.append(parse_products(url))
     print('Total results', len(results))
     save_csv(results)
+  read_file = pd.read_csv (r'products.csv')
+  read_file.to_excel (r'new_products.xlsx', index = None, header=True)
+
 
 
 if __name__ == '__main__':
