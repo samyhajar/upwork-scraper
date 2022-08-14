@@ -45,12 +45,24 @@ def parse_products(url):
 
 
 
+def save_csv(results):
+  keys = results[0].keys()
+
+  with open('products.csv', 'w') as f:
+    dict_writer = csv.DictWriter(f, keys)
+    dict_writer.writeheader()
+    dict_writer.writerows(results)
+
+def main():
+  results = []
+  for x in range(1,5):
+    print('Getting Page', x)
+    urls = get_product_links(x)
+    for url in urls:
+      results.append(parse_products(url))
+    print('Total results', len(results))
+    save_csv(results)
 
 
-results = []
-for x in range(1,5):
-  print('Getting Page', x)
-  urls = get_product_links(x)
-  for url in urls:
-    results.append(parse_products(url))
-  print('Total results', len(results))
+if __name__ == '__main__':
+    main()
